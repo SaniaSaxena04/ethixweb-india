@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Target, Users, Globe, Award, Sparkles } from 'lucide-react';
+import { Shield, Target, Users } from 'lucide-react';
 
 export const About: React.FC = () => {
   return (

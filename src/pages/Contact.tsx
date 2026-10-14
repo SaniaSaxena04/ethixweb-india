@@ -19,7 +19,6 @@ export const Contact: React.FC = () => {
     website_hp: '',
   });
 
-  const [turnstileToken, setTurnstileToken] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
@@ -49,7 +48,6 @@ export const Contact: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Primary: Supabase insertion
       const { error } = await supabase
         .from('leads')
         .insert([
@@ -69,7 +67,6 @@ export const Contact: React.FC = () => {
     } catch (err: any) {
       console.warn('Supabase offline or unconfigured. Saving locally:', err);
 
-      // Fallback: Local Storage
       const existingLeads = JSON.parse(localStorage.getItem('ethixweb_leads') || '[]');
       const newLead = {
         id: 'local-' + Date.now(),
@@ -108,7 +105,6 @@ export const Contact: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Contact Info Sidebar */}
         <div className="space-y-8">
           <div>
             <span className="text-xs font-bold text-[#E53935] uppercase tracking-widest">Get In Touch</span>
@@ -145,7 +141,6 @@ export const Contact: React.FC = () => {
           </div>
         </div>
 
-        {/* Enquiry Form */}
         <div className="bg-[#161922] p-8 rounded-2xl border border-[#2A2E39]">
           <h2 className="text-2xl font-bold text-white mb-6">Start a Conversation</h2>
 
@@ -167,7 +162,6 @@ export const Contact: React.FC = () => {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Hidden Spam Honeypot */}
             <input
               type="text"
               name="website_hp"
@@ -269,7 +263,7 @@ export const Contact: React.FC = () => {
               />
             </div>
 
-            <TurnstileWidget onVerify={(token) => setTurnstileToken(token)} />
+            <TurnstileWidget onVerify={() => {}} />
 
             <button
               type="submit"

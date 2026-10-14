@@ -16,7 +16,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Linting - Turn these to false so unused imports won't break production builds */
+    /* Disable unused variable checks on build */
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
